@@ -1,188 +1,302 @@
-let company = {
-  // the same object, compressed for brevity
-  sales: [
-    { name: "John", salary: 1000 },
-    { name: "Alice", salary: 1600 },
-  ],
-  development: {
-    sites: [
-      { name: "Peter", salary: 2000 },
-      { name: "Alex", salary: 1800 },
-    ],
-    internals: [{ name: "Jack", salary: 1300 }],
-  },
+// Loop
+function sumTo(n){
+  let sum = 0
+  for (let i=1; i<= n; i++){
+      sum+=i
+  }
+  return sum
+}
+
+//Recursion
+function sumToRecursion(n){
+  if (n==1){
+      return 1
+  }
+  else{
+     return n + sumToRecursion(n-1)
+  }
+}
+
+// arithmetic progression
+
+function sumToAP(n){
+  return n * (n+1)/2
+}
+
+//Test 100
+// console.log("Loop gave", sumTo(100000))
+// console.log("Recursion also gave", sumToRecursion(100000))
+// console.log("AP gave", sumToAP(100000))
+
+//FACTORIALS
+
+function factorial (n){
+  if (n==1){
+      return 1
+  }
+  return n * factorial(n-1)
+}
+//Test 5
+// console.log("Factorial of 5", factorial(5))
+
+function fibR(n){
+  let prev = 1
+  let prev2 = 1
+  // let count =
+  for (let i=3; i <=n; i++){
+      val = prev + prev2
+      prev2 = prev
+      prev = val
+
+  }
+  return prev
+}
+function fib(n){
+  if (n<=1){
+      return n
+  }
+
+      return  fib(n-2)-fib(n-1)
+
+  // let count =
+
+}
+
+// console.log(fib(77))
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null
+      }
+    }
+  }
 };
+//recursion
+function printList(list){
 
-//my Attempt
 
-var finalVal = 0;
-
-function Recurse(obj) {
-  var KEYS = Object.keys(obj);
-  var initialVal = 0;
-  for (let key of KEYS) {
-    if (Array.isArray(obj[key])) {
-      finalVal += obj[key].reduce((previousVal, currentVal) => {
-        return previousVal + currentVal.salary;
-      }, initialVal);
-    } else {
-      Recurse(obj[key]);
-    }
+  if (list){
+      console.log(list.value)
+      
+      printList(list.next)
   }
-  return finalVal;
-}
-//   console.log(Recurse(company))
+  // console.log(list)
+  return
 
-//fibonacci (Recursive way)
-var fibsArray = [0];
-var counter = 0;
-// num;
-function fibonacci(n) {
-  let len = fibsArray.length;
-
-  if (len == n) {
-    console.log(fibsArray);
-    return fibsArray;
-  } else {
-    len == 1 ? (counter = 1) : (counter += fibsArray[len - 2]);
-    fibsArray.push(counter);
-    fibonacci(n);
-  }
-}
-// fibonacci(10);
-
-//merge sort
-function mergeSort(Arr) {
-  //variables
-  var left;
-  var right;
-  //base case n<2 return
-  if (Arr.length < 2) {
-    console.log(Arr);
-    return Arr;
-  }
-  //else divide array into two parts
-  else {
-    if (Arr.length % 2 == 0 && Arr.length > 2) {
-      left = Arr.slice(0, Arr.length / 2);
-      right = Arr.slice(Arr.length / 2);
-      // console.log(left, right);
-    } else {
-      left = Arr.slice(0, Arr.length / 2 + 0.5);
-      right = Arr.slice(Arr.length / 2 + 0.5);
-      // console.log(left, right);
-    }
-  }
-
-  //mergesort the two parts recursively, which ends up merging them due to below
-
-  //merge the two parts using two way array merge
-  return merge(mergeSort(left), mergeSort(right));
-}
-//call merge sort
-finalSort = mergeSort([3, 2, 1, 5, 40, 10]);
-console.log(finalSort);
-
-//two way array merger
-function merge(Arr1, Arr2) {
-  var lft = 0;
-  var rgt = 0;
-  sortedArr = [];
-  while (lft <= Arr1.length && rgt <= Arr2.length) {
-    if (Arr1[lft] < Arr2[rgt]) {
-      sortedArr.push(Arr1.shift(lft));
-      lft++;
-    } else {
-      sortedArr.push(Arr2.shift(rgt));
-      rgt++;
-    }
-  }
-  return [...sortedArr, ...Arr1, ...Arr2];
 }
 
-//merge sort (headache version)
-// var sortList = [];
-// //split func
-// var original = [];
-// var half;
-// var sortedArr
+// printList(list)
 
-// function mergeSort(Arr) {
-//   var first;
-//   var second = 2;
-//   var list;
+function printListLoop(list){
+  let currentList=list
+  while(currentList){
+      console.log(currentList.value)
+      currentList = currentList.next
+  }
+}
+// printListLoop(list)
 
-//   if (sortList.length == 2) {
-//     while (sortList[0].length && sortList[1].length) {
-//       // Insert the smallest item into sortedArr
-//       if (sortList[0][0] < sortList[1][0]) {
-//         sortedArr.push(left.shift())
-//       } else {
-//         sortedArr.push(right.shift())
-//       }
-//       return [...sortList, ...sortList[0], ...sortList[1]]
+//REVERSE A LINKED LIST
+function reverseList(list){
 
-//     }
-//     // for (let i of sortList[0]) {
-//     //   for (let j of sortList[1]) {
-//     //     //work on logic to add list to sortList and append the remaining j
-//     //     if (i < j ) {
-//     //       list.includes(i)? list.push(j) :
-//     //       list.push(i);
-//     //       list.push(j);
-//     //       continue;
-//     //     } else {
-//     //       list.includes(j)? list.push(i) :
-//     //       list.push(j);
-//     //       list.push(i);
-//     //       continue
-//     //     }
-//         //  && list.includes(i))
-//         // i<j && !list.includes(j)? list.push(i) :list.unshift(j)
-//         // list.push(sortList1)
-//       }
+  list.prev = list.next
+  if (!list.next){
+      console.log(list)
 
-//   if (sortList[0].length == original.length) {
-//     console.log(sortList[0]);
-//     return sortList[0];
-//   }
-//   if (Arr.length == 2) {
-//     Arr[0][0] < Arr[1][0]
-//       ? sortList.push([...first[0], ...first[1]])
-//       : sortList.push([...first[1], ...first[0]]);
-//     return;
-//   }
+      return
 
-//   // else if (Arr.length>2){
-//   //   return mergeSort(Arr)
-//   //     // comparing sorted arrays into one
-//   //     // for (let i of first[0]){
-//   //     //   for (let j of first[1]){
-//   //     //     i<j && list.includes(i) && list.includes(j)? list.push(i) :list.unshift(j)
-//   //     //   }
-//   //     // }
-//   //   // }
-//   // }
 
-//   if (Arr.length % 2 == 0 && Arr.length > 2) {
-//     first = Arr.slice(0, Arr.length / 2);
-//     second = Arr.slice(Arr.length / 2);
-//     gg = [first, second];
-//     for (let splitArr in gg) {
-//       splitArr.length == 1 ? sortList.push[splitArr[0]] : mergeSort(splitArr);
-//     }
-//     // mergeSort(first)
-//   } else {
-//     first = Arr.slice(0, Arr.length / 2 + 0.5);
-//     second = Arr.slice(Arr.length / 2 + 0.5);
-//     dd = [first, second];
-//     for (let splitArr in dd) {
-//       splitArr.length == 1 ? sortList.push[splitArr[0]] : mergeSort(splitArr);
-//     }
-//   }
-//   console.log(first, second);
-//   // else if (Arr.length %2 ==0){
-//   //   first = Arr.slice(0,arr)
-//   // }
-// }
-// // mergeSort([5]);
+  }
+  reverseList(list.next)
+
+}
+
+//Collatz Conjecture
+let count = 0
+function Collatz (n) {
+  if (n<=1){
+      console.log("n is", n, " Value Conjectured with", count, " steps")
+      return
+  }
+  if (n%2 === 0){
+      count+=1
+      console.log(n)
+      Collatz(n/2)
+  }else{
+      count+=1
+      console.log(n)
+      Collatz((3*n) + 1)
+  }
+  
+}
+// Collatz(15)
+
+//sum up all nonnegatives
+function SumUp(n){
+
+  if (n<=1){
+      return n
+  }
+
+  return n + SumUp(n-1)
+}
+
+// console.log(SumUp(0))
+
+//traverse an n*m Grid to find unique paths. Contraints are you move 1 unit at a time.
+
+
+function Traverse(n,m, a, b){
+  if (n-1 == 0 && m > 1){
+      return Traverse(n, m-1)
+  }
+  if (m-1 ==0 && n >1){
+      return Traverse(n-1,m)
+  }
+  if (n==1 && m==1){
+      return 1 + Traverse(b-1, a-1, )
+  }
+  // if (n==2 && m==2){
+  //     return 1 + Traverse(n-1, m-1, a=n, b=m)
+  // }
+  return Traverse(n-1, m-1, )
+}
+
+// console.log(Traverse(2,4))
+
+/**
+* @param {string[]} operations
+* @return {number}
+*/
+var calPoints = function (operations) {
+  let sum = 0
+  let scoreArray = []
+  for (let i=0; i<=operations.length; i++) {
+      
+      let ops = operations[i]
+      if (Number.isInteger(+ops)){
+          scoreArray.push(+ops)
+          sum += +ops
+      }
+      // We then tackle each and every one of our ops
+      switch (ops) {
+          case "C":
+              sum = sum - scoreArray[scoreArray.length-1]
+             scoreArray.pop()
+              break
+          case "D":
+              val = scoreArray[scoreArray.length-1] + scoreArray[scoreArray.length-1]
+              sum += val
+              scoreArray.push(val)
+              break
+          case "+":
+              console.log(scoreArray)
+              val = scoreArray[scoreArray.length-1] + scoreArray[scoreArray.length-2]
+              sum += val
+              scoreArray.push(val)
+              break
+          default:
+              break
+
+      }
+
+  }
+  return sum
+
+};
+// console.log(calPoints(["5","2","C","D","+"]))
+
+/**
+* @param {string} s
+* @return {boolean}
+* 
+*/
+
+// NOT SOLVED !!!!!
+var isValid = function(s) {
+
+  let valid = false
+  for (let i=s.length; i >0 ;  i-=2){
+      // && i-2 >-1
+      // splice(-2, 2)
+      console.log("the first and last of the element", s[i-2], s[i-1])
+      if (s[i-2] === "(" && s[i-1] === ")"  ){
+          console.log(s[i-1], s[i-2])
+          valid = true
+       
+      }
+      else{
+          valid=false
+       
+      }
+  
+  }
+  return valid
+  
+  };
+
+
+
+const binarySearchRecur=(arr, n, low, high)=>{
+  // low = arr[0]
+  // high = arr.length -1
+  mid = Math.floor((high +low)/2)
+  guess = arr[mid]
+
+  // console.log(guess)
+  console.log("THE GREAT MID",guess)
+
+  if (guess === n){
+      console.log("the number was found at index", mid)
+      return mid
+  }
+  if (high <low){
+      console.log('not found')
+      return "not found"
+  }
+
+  
+  else if (guess < n){
+      low = mid + 1
+      binarySearch(arr, n, low, high)
+  }
+  else if (guess > n){
+      high = mid - 1
+      binarySearch(arr, n, low, high)
+  }
+}
+
+
+
+// binarySearchRecur([1,2, 5, 7, 30, 49, 136, 200,202,208, 400, 600,604, 609], 700, 0, 13)
+
+const binarySearchLoop= (arr,n )=> {
+
+  low = 0
+  high = arr.length -1
+  while (low<=high){
+      mid = Math.floor((high +low)/2)
+      console.log(mid)
+      if(arr[mid]===n){
+          console.log( n,"found at index", mid)
+          return mid
+      }
+      else if (arr[mid] < n){
+          low = mid + 1
+      }
+      else if (arr[mid]>n){
+          high = mid- 1
+      }
+      
+ }
+//    console.log('nott')
+ return "not found"
+
+}
+
+// binarySearchLoop([1,2, 5, 7, 30, 49, 136, 200,202,208, 400, 600,604, 609], 600) 
